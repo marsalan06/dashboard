@@ -1,18 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <!----beigin-->
+    <meta name="description" content="Login page example" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="canonical" href="https://keenthemes.com/metronic" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Page Custom Styles(used by this page)-->
+		<link href="{% static 'css/pages/login/classic/login-4.css' %}" rel="stylesheet" type="text/css" />
+		<!--end::Page Custom Styles-->
+		<!--begin::Global Theme Styles(used by all pages)-->
+		<link href="{% static 'plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css" />
+		<link href="{% static 'plugins/custom/prismjs/prismjs.bundle.css' %}" rel="stylesheet" type="text/css" />
+		<link href="{% static 'css/style.bundle.css' %}" rel="stylesheet" type="text/css" />
+		<!--end::Global Theme Styles-->
+		<!--begin::Layout Themes(used by all pages)-->
+		<link href="{% static 'css/themes/layout/header/base/light.css' %}" rel="stylesheet" type="text/css" />
+		<link href="{% static 'css/themes/layout/header/menu/light.css' %}" rel="stylesheet" type="text/css" />
+		<link href="{% static 'css/themes/layout/brand/dark.css' %}" rel="stylesheet" type="text/css" />
+		<link href="{% static 'css/themes/layout/aside/dark.css' %}" rel="stylesheet" type="text/css" />
+		<!--end::Layout Themes-->
+		<link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}" />
+    <!---endndd-->
+
+
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/contact/">Contact</a></li>
-            </ul>
-        </nav>
     </header>
     <main>
         {% block content %}{% endblock %}
@@ -20,5 +39,12 @@
     <footer>
         <p>&copy; 2023 My Website</p>
     </footer>
+    <script src="{% static 'plugins/global/plugins.bundle.js' %}"></script>
+		<script src="{% static 'plugins/custom/prismjs/prismjs.bundle.js' %}"></script>
+		<script src="{% static 'js/scripts.bundle.js' %}"></script>
+		<!--end::Global Theme Bundle-->
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="{% static 'js/pages/custom/login/login-general.js' %}"></script>
+		<!--end::Page Scripts-->
 </body>
 </html>

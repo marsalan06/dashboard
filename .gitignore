@@ -1,3 +1,6 @@
 venv/
 project_details.pdf
 server_info.txt
+dashboard/user_management/__pycache__/*
+dashboard/user_management/migrations/__pycache__
+dashboard/dashboard/__pycache__/*

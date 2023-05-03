@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import InfluencerForm
-from .models import Influencer
+from .forms import InfluencerForm, BusinessForm
+from .models import Influencer, Business
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 
@@ -11,7 +11,7 @@ def home(request):
     influencers = Influencer.objects.all()
     return render(request, 'home.html', {'influencers': influencers})
 
-def signup(request):
+def influencer_signup(request):
     if request.method == 'POST':
         user_form = UserCreationForm(request.POST)
         influencer_form = InfluencerForm(request.POST)
@@ -26,16 +26,31 @@ def signup(request):
         influencer_form = InfluencerForm()
     return render(request, 'signup.html', {'user_form': user_form, 'influencer_form': influencer_form})
 
-def login(request):
-    print("======entryerooooo=====")
+
+
+def business_signup(request):
     if request.method == 'POST':
-        print('======possspppot======')
+        user_form = UserCreationForm(request.POST)
+        business_form = BusinessForm(request.POST)
+        if user_form.is_valid() and business_form.is_valid():
+            user = user_form.save()
+            business = business_form.save(commit=False)
+            business.user = user
+            business.save()
+            return redirect('home')
+    else:
+        user_form = UserCreationForm()
+        business_form = BusinessForm()
+
+    return render(request, 'signup.html', {'user_form': user_form, 'business_form': business_form})
+
+def login(request):
+    if request.method == 'POST':
         # Handle form submission
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
         if user is not None:
-            print("==============user befor loeging")
             print(user)
             auth.login(request, user)
             return redirect('home')
@@ -47,6 +62,5 @@ def login(request):
         # User is already logged in
         return redirect('home')
     else:
-        print("==============testing login=-----")
         # Show login form
         return render(request, 'login.html')

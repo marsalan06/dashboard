@@ -93,7 +93,8 @@ class Business(models.Model):
     end_date = models.DateField(null=True, blank=True)
     reference_no = models.IntegerField(unique=True, db_index=True, validators=[MaxValueValidator(99999), MinValueValidator(0)], blank=True,null=True)
     report_ready = models.BooleanField(default=False)
-    influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE)
+    influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
