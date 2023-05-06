@@ -4,7 +4,7 @@
 	<!--begin::Head-->
 	<head><base href="">
 		<meta charset="utf-8" />
-		<title>CUSTOMER ENGAGEMENT | SIGNUP</title>
+		<title>CUSTOMER ENGAGEMENT | Login</title>
 		<meta name="description" content="Login page example" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -34,7 +34,7 @@
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Login-->
 			<div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
-				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('{% static 'media/bg/bg-3.jpg' %}');">
+				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image:url('{% static 'media/bg/bg-3.jpg' %}') ;">
 					<div class="login-form text-center p-7 position-relative overflow-hidden">
 						<!--begin::Login Header-->
 						<div class="d-flex flex-center mb-10">
@@ -43,27 +43,63 @@
 								<!-- <img src="{% static 'media/logos/logo-letter-13.png' %}" class="max-h-75px" alt="" /> -->
 							</a>
 						</div>
-              {% if business_form %}
-              <h1>Sign Up As Business</h1>
-              {% else %}
-              <h1>Sign Up As Influencer</h1>
-              {% endif %}
-
-              <form method="POST">
-                {% csrf_token %}
-                {{ user_form.as_p }}
-                {% if business_form %}
-                  {{ business_form.as_p }}
-                {% else %}
-                  {{ influencer_form.as_p }}
-                {% endif %}
-                <button type="submit">Sign up</button>
-              </form>
-
-
-
 						<!--end::Login Header-->
-
+                        
+                        <div class="">
+							<div class="mb-20">
+								<h3>Sign Up</h3>
+								<div class="text-muted font-weight-bold">Enter your details to create your account</div>
+							</div>
+							<form class="form" id="kt_login_signup_form" method="POST">
+                                {% csrf_token %}
+                                <h3>User Registeration</h3>
+                                {% for field in user_form%}
+                                    <div class="form-group mb-5">
+                                    <!-- <label for="{{ field.id_for_label }}">{{ field.label }}</label> -->
+                                    <div class="input-group mb-3">
+                                    <!-- {{field}} -->
+                                    {% if field.field.widget.input_type != 'checkbox' and field.field.widget.input_type != 'select' %}
+                                    <input type="{{ field.field.widget.input_type }}"
+                                                name="{{ field.name }}"
+                                                id="{{ field.id_for_label }}"
+                                                class="form-control h-auto form-control-solid py-4 px-8 {{ field.css_classes }}"
+                                                placeholder="Enter your {{ field.label }}"
+                                                 {% if field.value %}value="{{ field.value }}"{% endif %}>
+                                    {% endif %}
+                                    </div>
+                                    {% if field.errors %}
+                                    <div class="errors">
+                                        {% for error in field.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    </div>
+                                {% endfor %}
+                                
+								<div class="form-group mb-5 text-left">
+									<div class="checkbox-inline">
+										<label class="checkbox m-0">
+										<input type="checkbox" name="agree" />
+										<span></span>I Agree the
+										<a href="#" class="font-weight-bold ml-1">terms and conditions</a>.</label>
+									</div>
+									<div class="form-text text-muted text-center"></div>
+								</div>
+								<div class="form-group d-flex flex-wrap flex-center mt-10">
+									<button id="kt_login_signup_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">Sign Up</button>
+									<button id="kt_login_signup_cancel" class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2">Cancel</button>
+								</div>
+							</form>
+						</div>
+						<!--end::Login Sign in form-->
+						<!--begin::Login Sign up form-->
+						
+					</div>
+				</div>
+			</div>
+			<!--end::Login-->
+		</div>
 		<!--end::Main-->
 		<script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 		<!--begin::Global Config(global config for global JS scripts)-->
@@ -72,7 +108,7 @@
 		<!--begin::Global Theme Bundle(used by all pages)-->
 		<script src="{% static 'plugins/global/plugins.bundle.js' %}"></script>
 		<script src="{% static 'plugins/custom/prismjs/prismjs.bundle.js' %}"></script>
-		<!-- <script src="{% static 'js/scripts.bundle.js' %}"></script> -->
+		<script src="{% static 'js/scripts.bundle.js' %}"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{% static 'js/pages/custom/login/login-general.js' %}"></script>
@@ -80,4 +116,3 @@
 	</body>
 	<!--end::Body-->
 </html>
-

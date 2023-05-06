@@ -1,11 +1,19 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import Influencer, Business
+from django.contrib.auth.models import User
+
 
 class InfluencerForm(forms.ModelForm):
+    # user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+
+    def __init__(self, *args, users=None, **kwargs):
+        super(InfluencerForm, self).__init__(*args, **kwargs)
+        self.fields['user'] = forms.ModelChoiceField(queryset=users, widget=forms.Select(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Influencer
-        fields = ['name', 'state', 'city', 'zip_code', 'rank', 'status']
+        fields = ['name', 'state', 'city', 'zip_code', 'rank', 'status','user']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'state': forms.Select(attrs={'class': 'form-control'}),
@@ -21,10 +29,13 @@ class InfluencerForm(forms.ModelForm):
             'zip_code': _('Zip Code'),
             'rank': _('Rank'),
             'status': _('Status'),
+            'user': _('User')
         }
 
 
 class BusinessForm(forms.ModelForm):
+
+   
     class Meta:
         model = Business
         fields = ['name', 'contact_no', 'start_date', 'end_date', 'report_ready', 'influencer']

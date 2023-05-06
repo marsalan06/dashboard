@@ -50,6 +50,9 @@
 								<h3>Sign In To Admin</h3>
 								<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
 							</div>
+							{% if error_message %}
+								{{error_message}}
+							{% endif %}
 							<form class="form" method='POST' id="kt_login_signin_form">
 								{% csrf_token %}
 								<div class="form-group mb-5">
@@ -81,10 +84,10 @@
 										<!--end::Svg Icon-->
 									</span>Sign in with Google
 								</button>
-								<button type="submit">Sign In</button>
-								<a href="index.html" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
+								<button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4" type="submit">Sign In</button>
+								<!-- <a href="index.html" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
 									Sign Inlll
-								</a>
+								</a> -->
 							</form>
 							<div class="mt-10">
 								<span class="opacity-70 mr-4">Don't have an account yet?</span>
@@ -98,7 +101,7 @@
 								<h3>Sign Up</h3>
 								<div class="text-muted font-weight-bold">Enter your details to create your account</div>
 							</div>
-							<form class="form" id="kt_login_signup_form">
+							<form class="form" id="kt_login_signup_form" action="signup-influencer/" method="POST">
 								<div class="form-group mb-5">
 									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Fullname" name="fullname" />
 								</div>
@@ -157,7 +160,7 @@
 		<!--begin::Global Theme Bundle(used by all pages)-->
 		<script src="{% static 'plugins/global/plugins.bundle.js' %}"></script>
 		<script src="{% static 'plugins/custom/prismjs/prismjs.bundle.js' %}"></script>
-		<script src="{% static 'js/scripts.bundle.js' %}"></script>
+		<!-- <script src="{% static 'js/scripts.bundle.js' %}"></script> -->
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{% static 'js/pages/custom/login/login-general.js' %}"></script>
