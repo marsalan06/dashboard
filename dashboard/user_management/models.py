@@ -79,14 +79,21 @@ class Influencer(models.Model):
         return self.name
 
 
-# from myapp.models import User, Influencer
-
-# user = User.objects.create_user(email='jane@example.com', password='mypassword', name='Jane Doe')
-
-# influencer = Influencer.objects.create(user=user, name='Jane Doe', state='California', city='Los Angeles', zip_code=90001, rank=5, status='hire')
 
 
 class Business(models.Model):
+    
+    BUSINESS_TYPE_CHOICES = (
+        ('Influencer', 'Influencer'),
+        ('Brand', 'Brand'),
+        ('Agency', 'Agency'),
+        ('Publisher', 'Publisher'),
+        ('E-commerce', 'E-commerce'),
+        ('SaaS', 'SaaS'),
+        ('Media', 'Media'),
+        ('Non-profit', 'Non-profit')
+    )
+    
     name = models.CharField(max_length=255)
     contact_no = models.CharField(max_length=20)
     start_date = models.DateField(null=True, blank=True)
@@ -95,6 +102,7 @@ class Business(models.Model):
     report_ready = models.BooleanField(default=False)
     influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    type_of_business = models.CharField(max_length=255, choices=BUSINESS_TYPE_CHOICES, null=True, blank=True)
 
     def __str__(self):
         return self.name

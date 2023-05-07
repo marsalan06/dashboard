@@ -20,25 +20,18 @@ def home(request):
 
 def user_registration(request):
     if request.method == 'POST':
-        print("=======testing me here------")
         user_form = UserCreationForm(request.POST)
-        # influencer_form = InfluencerForm(request.POST)
-        print("=======aaa=====")
-        print(user_form)
-        # print(influencer_form)
+       
         if user_form.is_valid():
             user = user_form.save()
-            # influencer = influencer_form.save(commit=False)
-            # influencer.user = user
-            print("======i am here....")
-            # influencer.save()
             return redirect('home')
         else:
             print("========error====")
     else:
         user_form = UserCreationForm()
-        # influencer_form = InfluencerForm()
     return render(request, 'user_reg.html', {'user_form': user_form})
+
+
 
 def influencer_signup(request):
     
@@ -46,26 +39,16 @@ def influencer_signup(request):
     
     if request.method == 'POST':
         influencer_form = InfluencerForm(request.POST, users=users)
-        print("=======testing me here------")
-        # user_form = UserCreationForm(request.POST)
-        print("=======aaa=====")
-        # print(user_form)
-        # print(request.user)
-        # print(influencer_form)
+        
         if influencer_form.is_valid():
-            print("oooooo")
             user = influencer_form.cleaned_data['user']
-            # print(user)
-            # user = request.user
             influencer = influencer_form.save(commit=False)
             influencer.user = user
-            print("======i am here....")
             influencer.save()
             return redirect('home')
         else:
             print("========error====")
     else:
-        # user_form = UserCreationForm()
         influencer_form = InfluencerForm(users=users)
     return render(request, 'signup2.html', {'influencer_form': influencer_form})
 
@@ -73,18 +56,15 @@ def influencer_signup(request):
 
 @login_required(login_url='/login/')
 def business_signup(request):
-    # influencer = Influencer.objects.all()
+
     if request.method == 'POST':
-        # user_form = UserCreationForm(request.POST)
         business_form = BusinessForm(request.POST)
         if business_form.is_valid():
-            # user = user_form.save()
             business = business_form.save(commit=False)
             business.user = request.user
             business.save()
             return redirect('home')
     else:
-        # user_form = UserCreationForm()
         business_form = BusinessForm()
 
     return render(request, 'signup2.html', {'business_form': business_form})

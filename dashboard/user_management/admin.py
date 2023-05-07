@@ -9,11 +9,11 @@ class InfluencerAdmin(admin.ModelAdmin):
 
 
 class BusinessAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contact_no', 'start_date', 'end_date', 'reference_no', 'report_ready', 'influencer','user')
+    list_display = ('name', 'contact_no', 'start_date', 'end_date', 'reference_no', 'report_ready', 'influencer','user', 'type_of_business')
     list_filter = ('start_date', 'end_date', 'influencer')
     search_fields = ('name', 'contact_no', 'reference_no')
     ordering = ('-start_date',)
-    fields = ('name', 'contact_no', 'start_date', 'end_date', 'reference_no', 'report_ready', 'influencer','user')
+    fields = ('name', 'contact_no', 'start_date', 'end_date', 'reference_no', 'report_ready', 'influencer','user', 'type_of_business')
     readonly_fields = ('reference_no',)
 
     def get_readonly_fields(self, request, obj=None):

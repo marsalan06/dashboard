@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 
 class InfluencerForm(forms.ModelForm):
-    # user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 
     def __init__(self, *args, users=None, **kwargs):
         super(InfluencerForm, self).__init__(*args, **kwargs)
@@ -38,7 +37,7 @@ class BusinessForm(forms.ModelForm):
    
     class Meta:
         model = Business
-        fields = ['name', 'contact_no', 'start_date', 'end_date', 'report_ready', 'influencer']
+        fields = ['name', 'contact_no', 'start_date', 'end_date', 'report_ready', 'influencer', 'type_of_business']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'contact_no': forms.TextInput(attrs={'class': 'form-control'}),
@@ -47,6 +46,7 @@ class BusinessForm(forms.ModelForm):
             'reference_no': forms.NumberInput(attrs={'class': 'form-control'}),
             'report_ready': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'influencer': forms.Select(attrs={'class': 'form-control'}),
+            'type_of_business': forms.Select(attrs={'class': 'form-control'})
         }
         labels = {
             'name': _('Name'),
@@ -56,6 +56,7 @@ class BusinessForm(forms.ModelForm):
             'reference_no': _('Reference Number'),
             'report_ready': _('Report Ready'),
             'influencer': _('Influencer'),
+            'type_of_business': _('Type Of Business')
         }
 
     def clean(self):
@@ -65,10 +66,3 @@ class BusinessForm(forms.ModelForm):
         if start_date and end_date and start_date > end_date:
             raise forms.ValidationError("Start date must be before end date.")
 
-    # def save(self, user, commit=True):
-    #     business = super().save(commit=False)
-    #     business.user = user
-    #     if commit:
-    #         business.save()
-    #         self.save_m2m()
-    #     return business
