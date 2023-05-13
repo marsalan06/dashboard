@@ -32,24 +32,22 @@ def user_registration(request):
     return render(request, 'user_reg.html', {'user_form': user_form})
 
 
-
+@login_required(login_url='/login/')
 def influencer_signup(request):
     
-    users = User.objects.all()
-    
     if request.method == 'POST':
-        influencer_form = InfluencerForm(request.POST, users=users)
+        influencer_form = InfluencerForm(request.POST, user=request.user)
         
         if influencer_form.is_valid():
-            user = influencer_form.cleaned_data['user']
             influencer = influencer_form.save(commit=False)
-            influencer.user = user
+            influencer.user = request.user
             influencer.save()
             return redirect('home')
         else:
+            print(influencer_form.errors)
             print("========error====")
     else:
-        influencer_form = InfluencerForm(users=users)
+        influencer_form = InfluencerForm(user=request.user)
     return render(request, 'signup2.html', {'influencer_form': influencer_form})
 
 
@@ -58,14 +56,17 @@ def influencer_signup(request):
 def business_signup(request):
 
     if request.method == 'POST':
-        business_form = BusinessForm(request.POST)
+        business_form = BusinessForm(request.POST, user=request.user)
         if business_form.is_valid():
             business = business_form.save(commit=False)
             business.user = request.user
             business.save()
             return redirect('home')
+        else:
+            print("=======errors----")
+            print(business_form.errors)
     else:
-        business_form = BusinessForm()
+        business_form = BusinessForm(user=request.user)
 
     return render(request, 'signup2.html', {'business_form': business_form})
 

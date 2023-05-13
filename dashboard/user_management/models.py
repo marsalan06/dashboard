@@ -74,6 +74,8 @@ class Influencer(models.Model):
     zip_code = models.IntegerField()
     rank = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     status = models.CharField(max_length=255, choices=STATUS_CHOICES)
+    business_association = models.ManyToManyField('Business', blank=True)
+
 
     def __str__(self):
         return self.name
@@ -100,7 +102,7 @@ class Business(models.Model):
     end_date = models.DateField(null=True, blank=True)
     reference_no = models.IntegerField(unique=True, db_index=True, validators=[MaxValueValidator(99999), MinValueValidator(0)], blank=True,null=True)
     report_ready = models.BooleanField(default=False)
-    influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE, blank=True, null=True)
+    influencer_association = models.ManyToManyField('Influencer', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     type_of_business = models.CharField(max_length=255, choices=BUSINESS_TYPE_CHOICES, null=True, blank=True)
 
