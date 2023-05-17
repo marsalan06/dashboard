@@ -8,9 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 
-
-
-
 # Create your views here.
 
 def home(request):
@@ -92,6 +89,21 @@ def login(request):
         # Show login form
         return render(request, 'login_2.html')
 
+@login_required(login_url='/login/')
+def business_list(request):
+    context = {}
+    print("==============request user=====")
+    
+    if request.user.first_name and request.user.last_name:
+        context['name'] = request.user.first_name + ' ' + request.user.last_name
+    else:
+        context['name'] = request.user.username
+    
+    business_list = list(Business.objects.filter(user__id = request.user.id).values('name','contact_no','start_date','end_date','reference_no','report_ready','user__email'))
+    # print("=================business list====")
+    # print(business_list)
+    context['business_list'] = business_list
+    return render(request, 'business-list.html' , context)
 
 
 def logout_view(request):
