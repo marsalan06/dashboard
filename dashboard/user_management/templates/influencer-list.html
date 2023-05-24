@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 	<!--begin::Head-->
@@ -44,7 +45,7 @@
 			<!--begin::Logo-->
 			<a href="index.html">
 				<h5 class="text-dark mb-0">CUSTOMER ENGAGEMENT</h5>
-				<!-- <img alt="Logo" src="{% static 'media/logos/logo-light.png' %}" /> -->
+				<!-- <img alt="Logo" src="{% static 'media/logos/logo-light.png" /> -->
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -194,7 +195,7 @@
 													<span class="menu-text">Influencer Communication</span>
 												</a>
 											</li>
-											<li class="menu-item menu-item-active" aria-haspopup="true">
+											<li class="menu-item" aria-haspopup="true">
 												<a href="business-list.html" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
@@ -202,7 +203,7 @@
 													<span class="menu-text">Business List</span>
 												</a>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
+											<li class="menu-item menu-item-active" aria-haspopup="true">
 												<a href="influencer-list.html" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
@@ -390,9 +391,9 @@
 								<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"> {{ name }}</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{name}}</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-dark">
-											<div class="symbol-label" style="background-image:url('{% static 'media/users/300_21.jpg' %}');"></div>
+											<div class="symbol-label" style="background-image:url('{% static 'media/users/300_21.jpg'%}');"></div>
 										</span>
 									</div>
 								</div>
@@ -402,7 +403,7 @@
 										<div class="card-body">
 											<div class="d-flex align-items-center">
 												<div class="symbol symbol-60 mr-5">
-													<div class="symbol-label" style="background-image:url('{% static 'media/users/300_21.jpg' %}');"></div>
+													<div class="symbol-label" style="background-image:url('{% static 'media/users/300_21.jpg'%}');"></div>
 													<i class="symbol-badge bg-success"></i>
 												</div>
 												<div class="d-flex flex-column">
@@ -729,11 +730,80 @@
 								<!--begin::Dashboard-->
 								<!--begin::Row-->
 								<div class="row">
+									<div class="col-lg-12 col-xxl-12 gutter-b">
+										<div class="card card-custom">
+											<!--begin::Header-->
+											<div class="card-header card-header-tabs-line">
+												<h3 class="card-title">Influencer list</h3>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body">
+												<div class="row">
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 gutter-b">
+														<div class="card border-0 shadow-sm p-6">
+															<div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
+																<span class="mr-6">
+																	<i class="icon-3x fa fa-file-pdf text-primary"></i>
+																</span>
+																<div class="d-flex flex-column text-dark-75">
+																	<span class="font-weight-bolder font-size-h5">Opinion Polls</span>
+																	<span class="font-weight-bolder text-muted font-size-sm">Download PDF Report</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 gutter-b">
+														<div class="card border-0 shadow-sm p-6">
+															<div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
+																<span class="mr-6">
+																	<i class="icon-3x fa fa-file-pdf text-primary"></i>
+																</span>
+																<div class="d-flex flex-column text-dark-75">
+																	<span class="font-weight-bolder font-size-h5">Brand Promotion</span>
+																	<span class="font-weight-bolder text-muted font-size-sm">Download PDF Report</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 gutter-b mb-xl-0 mb-lg-0 mb-md-0 mb-sm-0">
+														<div class="card border-0 shadow-sm p-6">
+															<div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
+																<span class="mr-6">
+																	<i class="icon-3x fa fa-file-pdf text-primary"></i>
+																</span>
+																<div class="d-flex flex-column text-dark-75">
+																	<span class="font-weight-bolder font-size-h5">AD Promotion</span>
+																	<span class="font-weight-bolder text-muted font-size-sm">Download PDF Report</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 gutter-b mb-xl-0 mb-lg-0 mb-md-0 mb-sm-0">
+														<div class="card border-0 shadow-sm p-6">
+															<div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
+																<span class="mr-6">
+																	<i class="icon-3x fa fa-file-pdf text-primary"></i>
+																</span>
+																<div class="d-flex flex-column text-dark-75">
+																	<span class="font-weight-bolder font-size-h5">Product Promotion</span>
+																	<span class="font-weight-bolder text-muted font-size-sm">Download PDF Report</span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Body-->
+										</div>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-lg-8 col-xxl-8 gutter-b">
 										<div class="card card-custom card-stretch">
 											<!--begin::Header-->
 											<div class="card-header card-header-tabs-line">
-												<h3 class="card-title">Business List</h3>
+												<h3 class="card-title">Influencer</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
@@ -744,24 +814,42 @@
 														<thead>
 															<tr>
 																<th>ID</th>
-																<th>Business Name</th>
-																<th>Person of Contact</th>
-																<th>Service Start Date</th>
-																<th>Service End Date</th>
-																<th>Reference Number</th>
-																<th>Report Ready</th>
+																<th>Name</th>
+																<th>Stats/Province</th>
+																<th>City</th>
+																<th>Zip/Post Code</th>
+																<th>Rank</th>
+																<th>Status</th>
 															</tr>
 														</thead>
 														<tbody>
-															{% for business in business_list %}
+															{% for influencer in influencer_list %}
 															<tr>
 																<td>{{ forloop.counter }}</td>
-																<td>{{ business.name }}</td>
-																<td>{{ name }}</td>
-																<td>{{ business.start_date }}</td>
-																<td>{{ business.end_date }}</td>
-																<td>#{{ business.reference_no }}</td>
-																<td><span class="label font-weight-bold label-lg label-light-success label-inline">{{business.report_ready}}</span></td>
+																<td>{{ influencer.name }}</td>
+																<td>{{ influencer.state }}</td>
+																<td>{{ influencer.city }}</td>
+																<td>{{ influencer.zip_code }}</td>
+																<td>
+																	{% for i in influencer.rank|range_func %}
+																		+
+																	{% endfor %}
+																</td>
+																<style>
+																	.custom-link {
+																		color: black;
+																		font-weight: bold;
+																		text-decoration: none;
+																	}
+																	.custom-link:hover {
+																		/* Additional styling on hover (optional) */
+																	}
+																</style>
+																<td>
+																	<a href="{% url 'change_status' influencer.id %}" class="custom-link">
+																		{{ influencer.status }}
+																	</a>
+																</td>
 															</tr>
 															{% endfor %}
 														</tbody>
@@ -776,21 +864,18 @@
 										<div class="card card-custom card-stretch">
 											<!--begin::Header-->
 											<div class="card-header card-header-tabs-line">
-												<h3 class="card-title">Business Hired</h3>
+												<h3 class="card-title">Influencers Hired</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body">
-
-												{% for business in business_list%}
-													<!-- {{business}} -->
-												
+												{% for influencer in influencer_list_hired %}
 												<div class="d-flex align-items-center">
 													<div class="symbol symbol-circle symbol-50 mr-4">
-														<div class="symbol-label" style="background-image:url('{% static 'media/project-logos/1.png' %}');"></div>
+														<div class="symbol-label" style="background-image:url('{% static 'media/users/300_21.jpg' %}');"></div>
 													</div>
 													<div class="d-flex flex-column">
-														<h5 class="font-weight-bold text-dark mb-0">{{business.name}}</h5>
+														<h5 class="font-weight-bold text-dark mb-0">{{influencer.name}}</h5>
 														<div class="d-flex flex-wrap my-2">
 															<a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-4 mr-4 mb-lg-0 mb-2">
 															<span class="svg-icon svg-icon-md svg-icon-primary mr-1">
@@ -803,7 +888,7 @@
 																	</g>
 																</svg>
 																<!--end::Svg Icon-->
-															</span>{{business.user__email}}</a>
+															</span>{{influencer.user__email}}</a>
 															<a href="#" class="text-muted text-hover-primary font-weight-bold mb-lg-0 mb-2">
 															<span class="svg-icon svg-icon-md svg-icon-primary mr-1">
 																<!--begin::Svg Icon | path:{% static 'media/svg/icons/General/Lock.svg-->
@@ -833,7 +918,6 @@
 												</div>
 												<div class="separator separator-dashed my-5"></div>
 												{% endfor %}
-
 											</div>
 											<!--end::Body-->
 										</div>
@@ -844,12 +928,12 @@
 										<div class="card card-custom card-stretch">
 											<!--begin::Header-->
 											<div class="card-header card-header-tabs-line">
-												<h3 class="card-title">Calendar</h3>
+												<h3 class="card-title">Brand Promotion</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body">
-												<p>Select Date/Time/Set Reminder</p>
+												<p>Brand Promotion Report Form Followers</p>
 												<!--begin::Chart-->
 												<div id="chart_05"></div>
 												<!--end::Chart-->
@@ -861,12 +945,12 @@
 										<div class="card card-custom card-stretch">
 											<!--begin::Header-->
 											<div class="card-header card-header-tabs-line">
-												<h3 class="card-title">Total Followers</h3>
+												<h3 class="card-title">Opinion Polls</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body">
-												<p>Followers by Demography</p>
+												<p>Opinion Form Followers</p>
 												<!--begin::Chart-->
 												<div id="chart_12" class="d-flex justify-content-center"></div>
 												<!--end::Chart-->
@@ -878,12 +962,12 @@
 										<div class="card card-custom card-stretch">
 											<!--begin::Header-->
 											<div class="card-header card-header-tabs-line">
-												<h3 class="card-title">Total Earnings</h3>
+												<h3 class="card-title">Product Promotion</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body">
-												<p>Followers by Earnings</p>
+												<p>Promotion Report Form Followers</p>
 												<!--begin::Chart-->
 												<div id="chart_11" class="d-flex justify-content-center"></div>
 												<!--end::Chart-->

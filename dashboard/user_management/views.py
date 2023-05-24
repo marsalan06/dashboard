@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -92,7 +93,6 @@ def login(request):
 @login_required(login_url='/login/')
 def business_list(request):
     context = {}
-    print("==============request user=====")
     
     if request.user.first_name and request.user.last_name:
         context['name'] = request.user.first_name + ' ' + request.user.last_name
@@ -100,10 +100,39 @@ def business_list(request):
         context['name'] = request.user.username
     
     business_list = list(Business.objects.filter(user__id = request.user.id).values('name','contact_no','start_date','end_date','reference_no','report_ready','user__email'))
-    # print("=================business list====")
-    # print(business_list)
+    
     context['business_list'] = business_list
     return render(request, 'business-list.html' , context)
+
+
+@login_required(login_url='/login/')
+def influencer_list(request):
+    context = {}
+    
+    if request.user.first_name and request.user.last_name:
+        context['name'] = request.user.first_name + ' ' + request.user.last_name
+    else:
+        context['name'] = request.user.username
+    
+    influencer_list_for_hire = list(Influencer.objects.filter(status='hire').values('id','name','state','city','zip_code','rank','status','user__email'))
+    
+    context['influencer_list'] = influencer_list_for_hire
+    print(request.user.id)
+    influencer_list_hired = Influencer.objects.filter(business_association__user_id=request.user.id).exclude(status='hire').values('name','user__email')
+    context['influencer_list_hired'] = influencer_list_hired
+    print(influencer_list_hired)
+    return render(request, 'influencer-list.html' , context)
+
+
+def change_status(request, id):
+    
+    influencer_obj = get_object_or_404(Influencer, id=id)
+
+    influencer_obj.status = 'ask_quote'
+    influencer_obj.business_association.set([request.user.id])
+    influencer_obj.save()
+    return redirect('influencer-list')
+
 
 
 def logout_view(request):
